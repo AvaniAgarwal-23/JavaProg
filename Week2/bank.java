@@ -9,7 +9,24 @@ class InsufficientBalanceException extends Exception{
         super(msg);
     }
 }
-public class excep{
+class bankacc{
+    int n;
+    bankacc(int n){
+        this.n=n;
+    }
+    void wd (int x, int y) throws InsufficientBalanceException,InvalidAgeException{
+        if(n<18){
+                throw new InvalidAgeException("Not eligible");
+            }
+        if(x>y){
+            throw new InsufficientBalanceException("balance cant be -ve");
+        }
+        y-=x;
+        System.out.println("Withdrawal Successful");
+        System.out.println("Remaining Balance: "+y);
+    } 
+}
+public class bank{
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
         System.out.print("Enter age: ");
@@ -17,16 +34,9 @@ public class excep{
         int y=100;
         System.out.println("Enter the money u want to take out : ");
         int x=sc.nextInt();
+        bankacc acc=new bankacc(n);
         try {
-            if(n<18){
-                throw new InvalidAgeException("Not eligible");
-            }
-            else if(x>y){
-                throw new InsufficientBalanceException("balance cant be -ve");
-            }
-            else{
-                System.out.println("Eligible");
-            }
+           acc.wd(x,y);
         } 
         catch (InvalidAgeException e) {
             System.out.println(e.getMessage());
